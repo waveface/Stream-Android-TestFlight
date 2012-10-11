@@ -34,6 +34,7 @@ public class DownloadAPK extends HttpServlet {
 		while ((read = is.read(bytes)) != -1) {
 			os.write(bytes, 0, read);
 		}
+		is.close();
 		os.flush();
 		os.close();
 	}
