@@ -9,6 +9,7 @@ import idv.jason.androidappcb.data.AppDataEntity.AppData;
 import idv.jason.androidappcb.tasks.DownloadFileTask;
 import idv.jason.androidappcb.tasks.GetApkListTask;
 import idv.jason.androidappcb.tasks.GetExistApkListTask;
+import idv.jason.androidappcb.utils.Utils;
 import android.app.ListActivity;
 import android.app.ProgressDialog;
 import android.content.BroadcastReceiver;
@@ -155,7 +156,7 @@ public class AppListActivity extends ListActivity implements OnItemClickListener
 		AppData app = (AppData) view.getTag();
 		showProgressDialog();
 		mDownloading = true;
-		DownloadFileTask task = new DownloadFileTask(this, app.path, mDownloadPath, true);
+		DownloadFileTask task = new DownloadFileTask(this, app.path, mDownloadPath, Utils.getApkName(app));
 		task.execute(null, null, null);
 		
 	}

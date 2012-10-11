@@ -7,8 +7,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 public class FIleUtils {
-
-	public static boolean writeFile(String filename, String data, boolean append) {
+		public static boolean writeFile(String filename, String data, boolean append) {
 		boolean isSuccessed = false;
 		try {
 			File file = new File(filename);

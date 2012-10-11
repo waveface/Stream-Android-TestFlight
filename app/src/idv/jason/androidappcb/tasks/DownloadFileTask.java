@@ -10,7 +10,6 @@ import java.net.MalformedURLException;
 import java.net.URL;
 
 import idv.jason.androidappcb.Constants;
-import idv.jason.androidappcb.utils.StringUtil;
 import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
@@ -22,32 +21,37 @@ public class DownloadFileTask extends AsyncTask<Void, Integer, Void>{
 	private String mSavePath;
 	private String mDownloadPath;
 	private Context mContext;
-	private String mData;
 	private File mDownloadedFile = null;
-	private boolean mAsFile;
 	
 	private int mTotalSize = 0;
 	private int mCurrentSize = 0;
 	
-	public DownloadFileTask(Context context, String downloadPath, String savepath, boolean asFile) {
+	private String mFileName;
+	
+	public DownloadFileTask(Context context, String downloadPath, String savepath, String fileName) {
 		Log.d(TAG, "path:" + downloadPath);
 		mContext = context;
 		mSavePath = savepath;
 		mDownloadPath = downloadPath;
-		mAsFile = asFile;
+		mFileName = fileName;
 	}
 
 	@Override
 	protected Void doInBackground(Void... params) {
 		publishProgress(0);
-		mDownloadedFile = getFileFromUrl(mDownloadPath, mSavePath);
-		if(mAsFile == false && mDownloadedFile != null) {
-			mData = StringUtil.getStringFromFile(mDownloadedFile);
-		}
+		mDownloadedFile = getFileFromUrl(mDownloadPath, mSavePath, mFileName);
 		return null;
 	}
 	
-	public File getFileFromUrl(String url, String saveLocation) {
+	public File getFileFromUrl(String url, String saveLocation, String fileName) {
+		File savePath = new File(saveLocation);
+		if(savePath.exists() == false)
+			savePath.mkdir();
+		File file = new File(saveLocation + "/" + fileName);
+		if(file.exists()) {
+			return file;
+		}
+		
 		InputStream is = null;
 		try {
 			URL myURL = new URL(url);
@@ -70,20 +74,7 @@ public class DownloadFileTask extends AsyncTask<Void, Integer, Void>{
 		if (is == null) {
 			return null;
 		}
-		String extension = url
-				.substring(url.lastIndexOf(".") + 1, url.length())
-				.toLowerCase();
-		String name = url.substring(url.lastIndexOf("=") + 1,
-				url.lastIndexOf("."));
 		
-		if(extension == null || extension.length() == 0 ||
-				name == null || name.length() == 0)
-			return null;
-		
-		File savePath = new File(saveLocation);
-		if(savePath.exists() == false)
-			savePath.mkdir();
-		File file = new File(savePath + "/" + name + "." + extension);
 		try {
 			file.createNewFile();
 			FileOutputStream fos = new FileOutputStream(file);
@@ -128,11 +119,8 @@ public class DownloadFileTask extends AsyncTask<Void, Integer, Void>{
 	protected void onPostExecute(Void result) {
 		super.onPostExecute(result);
 		Intent intent = new Intent(Constants.ACTION_DOWNLOAD_APK_COMPLETE);
-		if(mDownloadedFile != null && mAsFile) {
+		if(mDownloadedFile != null) {
 			intent.putExtra(Constants.DATA_FILE_PATH, mDownloadedFile.getAbsolutePath());
-		}
-		if(mData != null) {
-			intent.putExtra(Constants.DATA_DOWNLOAD_DATA, mData);
 		}
 		mContext.sendBroadcast(intent);
 	}

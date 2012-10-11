@@ -15,7 +15,6 @@ public class Constants {
 	
 	public static final String DATA_APK_LIST = "idv.jason.androidcb.data.DATA_APK_LIST";
 	public static final String DATA_FILE_PATH = "idv.jason.androidcb.data.FILE_PATH";
-	public static final String DATA_DOWNLOAD_DATA = "idv.jason.androidcb.data.DOWNLOAD_DATA";
 	public static final String DATA_DOWNLOAD_PROGRESS = "idv.jason.androidcb.data.DOWNLOAD_PROGRESS";
 	public static final String DATA_DOWNLOAD_MAX_PROGRESS = "idv.jason.androidcb.data.DOWNLOAD_MAX_PROGRESS";
 	public static final String DATA_DOWNLOADING = "idv.jason.androidcb.data.DOWNLOADING";

@@ -11,6 +11,7 @@ import idv.jason.androidappcb.Constants;
 import idv.jason.androidappcb.R;
 import idv.jason.androidappcb.data.AppDataEntity;
 import idv.jason.androidappcb.data.AppDataEntity.AppData;
+import idv.jason.androidappcb.utils.Utils;
 import android.content.Context;
 import android.os.Environment;
 import android.view.LayoutInflater;
@@ -84,7 +85,8 @@ public class AppListAdapter extends BaseAdapter{
 		tv.setText(app.versionName + " (" + app.versionCode + ")");
 
 		image = (ImageView)convertView.findViewById(R.id.image_exist);
-		if(new File(mDownloadPath + "/" + app.apkName).exists())
+		String apkName =  Utils.getApkName(app);
+		if(apkName != null && new File(mDownloadPath + "/", apkName).exists())
 			image.setVisibility(View.VISIBLE);
 		else
 			image.setVisibility(View.INVISIBLE);
