@@ -22,7 +22,10 @@ public class GetInstallers extends HttpServlet {
     	RuntimeData.SOTRED_PATH = mStorePath;
     	//GET JSON INSTALLERS OBJECT SAVED
 		String json = FIleUtils.readFile(RuntimeData.SOTRED_PATH+File.separator+Constant.STORE_JSON_NAME);
-		RuntimeData.installers = new Gson().fromJson(json, InstallersResponse.class);
+		if(json != null)
+			RuntimeData.installers = new Gson().fromJson(json, InstallersResponse.class);
+		else
+			RuntimeData.installers = new InstallersResponse(); 
     }
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.setContentType("text/html; charset=UTF-8");

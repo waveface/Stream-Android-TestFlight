@@ -1,6 +1,5 @@
 package com.waveface.android.testflighter.util;
 
-import java.io.File;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
