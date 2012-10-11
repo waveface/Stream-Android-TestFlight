@@ -67,13 +67,13 @@ public class HttpInvoker {
 			content = response.getEntity().getContent();
          } catch (IOException e) {
         	 httpGet.abort();
-            Log.w(TAG, "I/O error while retrieving bitmap from " + url, e); 
+            Log.w(TAG, "I/O error while retrieving input stream from " + url, e); 
         } catch (IllegalStateException e) {
         	httpGet.abort();
             Log.w(TAG, "Incorrect URL: " + url);
         } catch (Exception e) {
         	httpGet.abort();
-            Log.w(TAG, "Error while retrieving bitmap from " + url, e); 
+            Log.w(TAG, "Error while retrieving input stream from " + url, e); 
         }
 		return content;
 	}

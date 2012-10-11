@@ -25,7 +25,8 @@ public class GetInstallers extends HttpServlet {
 		if(json != null)
 			RuntimeData.installers = new Gson().fromJson(json, InstallersResponse.class);
 		else
-			RuntimeData.installers = new InstallersResponse(); 
+			RuntimeData.installers = new InstallersResponse();
+		
     }
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.setContentType("text/html; charset=UTF-8");

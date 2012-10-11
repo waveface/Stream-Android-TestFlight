@@ -1,9 +1,9 @@
 package idv.jason.androidappcb;
 
 public class Constants {
-	public static final String APP_SAVE_DIR = "AndroidAppCB";
-	public static final String DOWNLOAD_PATH_LIST_PREFIX = "http://localhost:8080/AndroidTestFlighter/GetInstallers";
-	public static final String DOWNLOAD_PATH_APK_PREFIX = "http://localhost:8080/AndroidTestFlighter/DownloadAPK";
+	public static final String APP_SAVE_DIR = "TestFlight";
+	public static final String DOWNLOAD_PATH_LIST_PREFIX = "http://192.168.1.144:8080/Stream-Android-TestFlight-Server/GetInstallers";
+	public static final String DOWNLOAD_PATH_APK_PREFIX = "http://192.168.1.144:8080/Stream-Android-TestFlight-Server/DownloadAPK";
 	
 	
 	public static final String ACTION_DOWNLOAD_APK_COMPLETE = "idv.jason.androidcb.action.DOWNLOAD_APK_COMPLETE";
