@@ -52,8 +52,20 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="5dip"
+        android:layout_toLeftOf="@+id/image_exist"
         android:layout_alignTop="@+id/createDateText"
         android:layout_toRightOf="@+id/createDateText"/>
+    
+    <ImageView 
+        android:id="@+id/image_exist"
+        android:src="@drawable/save"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="5dip"
+        android:layout_marginLeft="5dip"
+        />
 
     
 

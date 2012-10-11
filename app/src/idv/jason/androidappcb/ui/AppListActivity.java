@@ -5,8 +5,10 @@ import java.io.File;
 import idv.jason.androidappcb.Constants;
 import idv.jason.androidappcb.R;
 import idv.jason.androidappcb.data.AppDataEntity;
+import idv.jason.androidappcb.data.AppDataEntity.AppData;
 import idv.jason.androidappcb.tasks.DownloadFileTask;
 import idv.jason.androidappcb.tasks.GetApkListTask;
+import idv.jason.androidappcb.tasks.GetExistApkListTask;
 import android.app.ListActivity;
 import android.app.ProgressDialog;
 import android.content.BroadcastReceiver;
@@ -38,11 +40,14 @@ public class AppListActivity extends ListActivity implements OnItemClickListener
 		File externalStorage = Environment.getExternalStorageDirectory();
 		mDownloadPath = externalStorage.getAbsolutePath() + "/"
 				+ Constants.APP_SAVE_DIR;
+		
+		File file = new File(mDownloadPath);
+		if(file.exists() == false)
+			file.mkdir();
 
 		if(savedInstanceState == null) {
-			mProgress = ProgressDialog.show(this, getString(R.string.downloading), getString(R.string.downloading_apk_list));
-			GetApkListTask getApk = new GetApkListTask(this);
-			getApk.execute(null, null, null);
+			GetExistApkListTask getApk = new GetExistApkListTask(AppListActivity.this);
+			getApk.execute(mDownloadPath + "/" + Constants.APP_LIST_SAVE_NAME, null, null);
 		} else {
 			boolean downloading = savedInstanceState.getBoolean(Constants.DATA_DOWNLOADING, false);
 			if(downloading)
@@ -51,6 +56,7 @@ public class AppListActivity extends ListActivity implements OnItemClickListener
 		
 		
 		IntentFilter filter = new IntentFilter();
+		filter.addAction(Constants.ACTION_READ_LIST_COMPLETE);
 		filter.addAction(Constants.ACTION_DOWNLOAD_LIST_COMPLETE);
 		filter.addAction(Constants.ACTION_DOWNLOAD_APK_COMPLETE);
 		filter.addAction(Constants.ACTION_DOWNLOAD_STATUS);
@@ -87,7 +93,17 @@ public class AppListActivity extends ListActivity implements OnItemClickListener
 		@Override
 		public void onReceive(Context context, Intent intent) {
 			String action = intent.getAction();
-			if(Constants.ACTION_DOWNLOAD_LIST_COMPLETE.equals(action)) { 
+			if(Constants.ACTION_READ_LIST_COMPLETE.equals(action)) {
+				if(intent.getExtras() != null) {
+					AppDataEntity apps = intent.getExtras().getParcelable(Constants.DATA_APK_LIST);
+					setupAdapter(apps);
+				}
+
+				mProgress = ProgressDialog.show(AppListActivity.this, getString(R.string.downloading), getString(R.string.downloading_apk_list));
+				GetApkListTask getApk = new GetApkListTask(AppListActivity.this);
+				getApk.execute(mDownloadPath + "/" + Constants.APP_LIST_SAVE_NAME, null, null);
+				
+			} else if(Constants.ACTION_DOWNLOAD_LIST_COMPLETE.equals(action)) { 
 				dismissProgressDialog();
 				if(intent.getExtras() != null) {
 					ImageView image = (ImageView) findViewById(R.id.image_server_status);
@@ -136,11 +152,10 @@ public class AppListActivity extends ListActivity implements OnItemClickListener
 
 	@Override
 	public void onItemClick(AdapterView<?> adapter, View view, int position, long arg3) {
-		String apkName = (String) view.getTag();
+		AppData app = (AppData) view.getTag();
 		showProgressDialog();
 		mDownloading = true;
-//		DownloadFileTask task = new DownloadFileTask(this, Constants.DOWNLOAD_PATH_APK_PREFIX + "&path="+ apkName, mDownloadPath, true);
-		DownloadFileTask task = new DownloadFileTask(this, Constants.DOWNLOAD_PATH_APK_PREFIX, mDownloadPath, true);
+		DownloadFileTask task = new DownloadFileTask(this, app.path, mDownloadPath, true);
 		task.execute(null, null, null);
 		
 	}

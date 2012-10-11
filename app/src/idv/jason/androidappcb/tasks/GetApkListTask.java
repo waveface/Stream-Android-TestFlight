@@ -2,7 +2,9 @@ package idv.jason.androidappcb.tasks;
 
 import idv.jason.androidappcb.Constants;
 import idv.jason.androidappcb.data.AppDataEntity;
+import idv.jason.androidappcb.data.AppDataEntity.AppData;
 import idv.jason.androidappcb.network.HttpInvoker;
+import idv.jason.androidappcb.utils.FIleUtils;
 
 import com.google.gson.Gson;
 
@@ -11,7 +13,7 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 
-public class GetApkListTask extends AsyncTask<Void, Void, Void>{
+public class GetApkListTask extends AsyncTask<String, Void, Void>{
 	public static final String TAG = GetApkListTask.class.getSimpleName();
 	private Context mContext;
 	private AppDataEntity mSourceList;
@@ -21,11 +23,17 @@ public class GetApkListTask extends AsyncTask<Void, Void, Void>{
 	}
 	
 	@Override
-	protected Void doInBackground(Void... arg0) {
-		String jsonOutput = HttpInvoker.getStringFromUrl(Constants.DOWNLOAD_PATH_LIST_PREFIX);
-		if(jsonOutput!=null && !jsonOutput.equals("ConnectTimeoutException")) {
-			mSourceList = new Gson().fromJson(jsonOutput, AppDataEntity.class);
+	protected Void doInBackground(String... arg0) {
+		String filename = arg0[0];
+		String json = HttpInvoker.getStringFromUrl(Constants.DOWNLOAD_PATH_LIST_PREFIX);
+		if(json!=null && !json.equals("ConnectTimeoutException")) {
+			FIleUtils.writeFile(filename, json, false);
+			mSourceList = new Gson().fromJson(json, AppDataEntity.class);
 			if(mSourceList != null) {
+				for(int i=0; i<mSourceList.apps.size(); ++i) {
+					AppData app = mSourceList.apps.get(i);
+					app.apkName = app.path.substring(app.path.lastIndexOf("=") +1); 
+				}
 			}
 		}
 		return null;

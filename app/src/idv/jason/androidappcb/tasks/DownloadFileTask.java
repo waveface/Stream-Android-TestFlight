@@ -73,7 +73,7 @@ public class DownloadFileTask extends AsyncTask<Void, Integer, Void>{
 		String extension = url
 				.substring(url.lastIndexOf(".") + 1, url.length())
 				.toLowerCase();
-		String name = url.substring(url.lastIndexOf("/") + 1,
+		String name = url.substring(url.lastIndexOf("=") + 1,
 				url.lastIndexOf("."));
 		
 		if(extension == null || extension.length() == 0 ||
