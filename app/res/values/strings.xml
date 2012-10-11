@@ -1,0 +1,12 @@
+<resources>
+    <string name="server_status">Server Status:</string>
+    <string name="app_name">AndroidAppCB</string>
+    <string name="create_date">Created Date:</string>
+    <string name="version_code">Version Code:</string>
+    <string name="version_name">Version Name:</string>
+    <string name="app_icon">App Icon</string>
+    <string name="downloading">Downloading</string>
+    <string name="downloading_apk_list">Downloading apk list</string>
+    <string name="downloading_apk">Downloading apk</string>
+    <string name="change_log">ChangeLog:</string>
+</resources>

@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" 
+    android:layout_gravity="center_vertical">
+
+    <ImageView
+        android:id="@+id/app_ic"
+        android:layout_width="50dip"
+        android:layout_height="50dip"
+        android:layout_alignParentLeft="true"
+        android:layout_margin="5dip" 
+        android:contentDescription="@string/app_icon"/>
+
+    
+    <TextView
+        android:id="@+id/appName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:textStyle="bold"
+        android:layout_toRightOf="@+id/app_ic"
+	/>
+
+    <TextView
+        android:id="@+id/versionText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/app_ic"
+        android:layout_below="@+id/appName"
+        android:text="@string/version_code" />
+
+    <TextView
+        android:id="@+id/version"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="5dip"
+        android:layout_alignTop="@+id/versionText"
+        android:layout_toRightOf="@+id/versionText"/>
+    
+    
+    <TextView
+        android:id="@+id/createDateText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/versionText"
+        android:layout_toRightOf="@+id/app_ic"
+        android:text="@string/create_date" />
+    
+    <TextView
+        android:id="@+id/createDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="5dip"
+        android:layout_alignTop="@+id/createDateText"
+        android:layout_toRightOf="@+id/createDateText"/>
+
+    
+
+</RelativeLayout>
