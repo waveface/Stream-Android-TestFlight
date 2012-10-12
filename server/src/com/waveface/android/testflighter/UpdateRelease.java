@@ -29,7 +29,7 @@ public class UpdateRelease extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//
     	if(mHttpHeader==null){
-    		mHttpHeader = request.getScheme()+"://"+request.getRemoteAddr()+":"
+    		mHttpHeader = request.getScheme()+"://"+Constant.IP_ADDRESS+":"
     			+request.getLocalPort()+request.getContextPath()+Constant.DOWNLOAD_SERVLET;
     	}
     	response.setContentType("text/html; charset=UTF-8");

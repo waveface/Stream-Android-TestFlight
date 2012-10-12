@@ -11,4 +11,6 @@ public class Constant {
 	public final static String APK_PATH = "apkPath";	
 	public final static String DOWNLOAD_SERVLET = "/DownloadAPK?filename=";		
 	public final static String STORE_JSON_NAME = "installers.json";
+	
+	public final static String IP_ADDRESS = "192.168.1.98";
 }
