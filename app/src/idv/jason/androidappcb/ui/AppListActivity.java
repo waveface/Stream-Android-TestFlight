@@ -133,6 +133,8 @@ public class AppListActivity extends ListActivity implements OnItemClickListener
 				if(path == null) {
 					return;
 				}
+				AppListAdapter adapter = (AppListAdapter) getListView().getAdapter();
+				adapter.notifyDataSetChanged();
 				openApk(new File(path));
 			} else if(Constants.ACTION_DOWNLOAD_STATUS.equals(action)) {
 				int progress = intent.getIntExtra(Constants.DATA_DOWNLOAD_PROGRESS, 0);

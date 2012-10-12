@@ -26,7 +26,9 @@ public class DownloadAPK extends HttpServlet {
 		response.setContentType("application/octet-stream");
 		response.setHeader("Content-Disposition",
 				"attachment;filename="+filename);
-		InputStream is =  new FileInputStream(new File(RuntimeData.APK_PATH+File.separator+filename));  
+		File apkFile = new File(RuntimeData.APK_PATH+File.separator+filename);
+		InputStream is =  new FileInputStream(apkFile);
+		response.setContentLength((int) apkFile.length());
 		int read = 0;
 		byte[] bytes = new byte[BYTES_DOWNLOAD];
 		OutputStream os = response.getOutputStream();
