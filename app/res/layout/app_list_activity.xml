@@ -16,6 +16,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="5dip"
+        android:layout_marginTop="2dip"
         android:layout_alignTop="@+id/text_server_status_title"
         android:layout_toRightOf="@+id/text_server_status_title"
         android:src="@drawable/red_dot" />

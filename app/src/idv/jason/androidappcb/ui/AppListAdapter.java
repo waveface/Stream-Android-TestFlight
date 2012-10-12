@@ -96,10 +96,10 @@ public class AppListAdapter extends BaseAdapter{
 			image.setVisibility(View.VISIBLE);
 		else
 			image.setVisibility(View.INVISIBLE);
-		
+
+		image = (ImageView)convertView.findViewById(R.id.image_new);
 		boolean found = false;
 		if(mOldApps != null) {
-			image = (ImageView)convertView.findViewById(R.id.image_new);
 			for(int i=0; i<mOldApps.apps.size(); ++i) {
 				AppData oldApp = mOldApps.apps.get(i);
 				if(oldApp.name.equals(app.name)) {
@@ -111,7 +111,7 @@ public class AppListAdapter extends BaseAdapter{
 				image.setVisibility(View.INVISIBLE);
 			}
 		}
-		if(found == false)
+		if(found == false && mOldApps != null)
 			image.setVisibility(View.VISIBLE);
 		
 		convertView.setTag(app);

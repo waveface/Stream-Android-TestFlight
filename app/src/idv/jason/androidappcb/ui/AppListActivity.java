@@ -20,6 +20,9 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
@@ -70,6 +73,13 @@ public class AppListActivity extends ListActivity implements OnItemClickListener
 		outState.putBoolean(Constants.DATA_DOWNLOADING, mDownloading);
 	}
 	
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		MenuInflater inflater = getMenuInflater();
+	    inflater.inflate(R.menu.menu, menu);
+	    return true;
+	}
+	
 	public void onDestroy() {
 		super.onDestroy();
 		unregisterReceiver(mReceiver);
@@ -112,7 +122,7 @@ public class AppListActivity extends ListActivity implements OnItemClickListener
 				dismissProgressDialog();
 				if(intent.getExtras() != null) {
 					ImageView image = (ImageView) findViewById(R.id.image_server_status);
-					image.setImageResource(R.drawable.greed_dot);
+					image.setImageResource(R.drawable.green_dot);
 					AppDataEntity apps = intent.getExtras().getParcelable(Constants.DATA_APK_LIST);
 					setupAdapter(apps);
 				}
@@ -163,5 +173,13 @@ public class AppListActivity extends ListActivity implements OnItemClickListener
 		DownloadFileTask task = new DownloadFileTask(this, app.path, mDownloadPath, Utils.getApkName(app));
 		task.execute(null, null, null);
 		
+	}
+	
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		mProgress = ProgressDialog.show(AppListActivity.this, getString(R.string.downloading), getString(R.string.downloading_apk_list));
+		GetApkListTask getApk = new GetApkListTask(AppListActivity.this);
+		getApk.execute(mDownloadPath + "/" + Constants.APP_LIST_SAVE_NAME, null, null);
+		return true;
 	}
 }

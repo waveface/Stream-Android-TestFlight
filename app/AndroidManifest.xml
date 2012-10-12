@@ -15,7 +15,8 @@
         android:theme="@style/ThemeHolo">
 
         <activity 
-            android:name=".ui.AppListActivity">
+            android:name=".ui.AppListActivity"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
