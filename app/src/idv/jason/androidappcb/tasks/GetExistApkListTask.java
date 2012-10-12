@@ -28,14 +28,14 @@ public class GetExistApkListTask extends AsyncTask<String, Void, AppDataEntity>{
 		AppDataEntity appDataEntity = new Gson().fromJson(json, AppDataEntity.class);
 		
 
-		if(appDataEntity != null) {
+		if(appDataEntity != null && appDataEntity.apps != null) {
 			for(int i=0; i<appDataEntity.apps.size(); ++i) {
 				AppData app = appDataEntity.apps.get(i);
 				app.apkName = app.path.substring(app.path.lastIndexOf("=") +1); 
 			}
+			return appDataEntity;
 		}
-		
-		return appDataEntity;
+		return null;
 	}
 
 	@Override
