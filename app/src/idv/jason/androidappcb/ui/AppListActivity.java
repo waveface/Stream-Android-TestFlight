@@ -76,7 +76,11 @@ public class AppListActivity extends ListActivity implements OnItemClickListener
 	}
 	
 	private void setupAdapter(AppDataEntity apps) {
-		AppListAdapter adapter = new AppListAdapter(this, apps);
+		AppListAdapter adapter = (AppListAdapter) getListView().getAdapter();
+		if(adapter != null)
+			adapter = new AppListAdapter(this, apps, adapter.getApps());
+		else
+			adapter = new AppListAdapter(this, apps, null);
 		getListView().setAdapter(adapter);
 		
 		getListView().setOnItemClickListener(this);

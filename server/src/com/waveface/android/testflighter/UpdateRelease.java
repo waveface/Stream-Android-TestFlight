@@ -39,6 +39,7 @@ public class UpdateRelease extends HttpServlet {
 		String versionName = request.getParameter(Constant.VERSION_NAME);
 		String path = request.getParameter(Constant.PATH);
 		String features = request.getParameter(Constant.FEATURES);
+		String buildNumber = request.getParameter(Constant.BUILD_NUMBER);
 		String action = request.getParameter("action");
 		if(action!=null){
 			if(action.equals("delete")){				
@@ -50,6 +51,7 @@ public class UpdateRelease extends HttpServlet {
 			installer.name = name ;
 			installer.versionCode = versionCode ;
 			installer.versionName = versionName ;
+			installer.buildNumber = buildNumber ;
 			installer.path = mHttpHeader+path;
 			installer.features = features ;
 			installer.createdDate = StringUtil.formatDate(new Date());

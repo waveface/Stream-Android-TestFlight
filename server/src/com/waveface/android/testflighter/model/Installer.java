@@ -27,4 +27,7 @@ public class Installer {
 	
 	@SerializedName("features")
 	public String features;
+	
+	@SerializedName("buildNumber")
+	public String buildNumber;
 }

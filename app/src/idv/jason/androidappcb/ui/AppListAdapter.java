@@ -22,16 +22,22 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 public class AppListAdapter extends BaseAdapter{
-	private AppDataEntity mApps;
+	private AppDataEntity mApps = null;
+	private AppDataEntity mOldApps = null;
 	private LayoutInflater mInflater;
 	private String mDownloadPath;
 	
-	public AppListAdapter(Context context, AppDataEntity apps) {
+	public AppListAdapter(Context context, AppDataEntity apps, AppDataEntity oldApps) {
 		mApps = apps;
+		mOldApps = oldApps;
 		mInflater = LayoutInflater.from(context);
 		File externalStorage = Environment.getExternalStorageDirectory();
 		mDownloadPath = externalStorage.getAbsolutePath() + "/"
 				+ Constants.APP_SAVE_DIR;
+	}
+	
+	public AppDataEntity getApps() {
+		return mApps;
 	}
 
 	@Override
@@ -90,6 +96,23 @@ public class AppListAdapter extends BaseAdapter{
 			image.setVisibility(View.VISIBLE);
 		else
 			image.setVisibility(View.INVISIBLE);
+		
+		boolean found = false;
+		if(mOldApps != null) {
+			image = (ImageView)convertView.findViewById(R.id.image_new);
+			for(int i=0; i<mOldApps.apps.size(); ++i) {
+				AppData oldApp = mOldApps.apps.get(i);
+				if(oldApp.name.equals(app.name)) {
+					if(Integer.parseInt(oldApp.buildNumber) < Integer.parseInt(app.buildNumber))
+						image.setVisibility(View.VISIBLE);
+					found = true;
+					break;
+				}
+				image.setVisibility(View.INVISIBLE);
+			}
+		}
+		if(found == false)
+			image.setVisibility(View.VISIBLE);
 		
 		convertView.setTag(app);
 		

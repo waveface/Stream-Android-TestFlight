@@ -40,6 +40,9 @@ public class AppDataEntity implements Parcelable{
 		@SerializedName("features")
 		public String features;
 		
+		@SerializedName("buildNumber")
+		public String buildNumber;
+		
 		public String apkName;
 	}
 		
@@ -59,6 +62,7 @@ public class AppDataEntity implements Parcelable{
 			app.path = in.readString();
 			app.features = in.readString();
 			app.apkName = in.readString();
+			app.buildNumber = in.readString();
 			apps.add(app);
 		}
 	}
@@ -79,6 +83,7 @@ public class AppDataEntity implements Parcelable{
 			out.writeString(apps.get(i).path);
 			out.writeString(apps.get(i).features);
 			out.writeString(apps.get(i).apkName);
+			out.writeString(apps.get(i).buildNumber);
 		}
 		
 	}
