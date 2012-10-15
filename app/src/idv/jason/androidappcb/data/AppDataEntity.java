@@ -20,31 +20,6 @@ public class AppDataEntity implements Parcelable{
 			return new AppDataEntity[size];
 		}
 	};
-	
-	public class AppData {
-		@SerializedName("name")
-		public String name;
-		
-		@SerializedName("versionCode")
-		public String versionCode;
-		
-		@SerializedName("versionName")
-		public String versionName;
-		
-		@SerializedName("createdDate")
-		public String createdDate;
-		
-		@SerializedName("path")
-		public String path;
-		
-		@SerializedName("features")
-		public String features;
-		
-		@SerializedName("buildNumber")
-		public String buildNumber;
-		
-		public String apkName;
-	}
 		
 	@SerializedName("installers")
 	public List<AppData> apps;

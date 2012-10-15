@@ -2,7 +2,7 @@ package idv.jason.androidappcb.tasks;
 
 import idv.jason.androidappcb.Constants;
 import idv.jason.androidappcb.data.AppDataEntity;
-import idv.jason.androidappcb.data.AppDataEntity.AppData;
+import idv.jason.androidappcb.data.AppData;
 import idv.jason.androidappcb.network.HttpInvoker;
 import idv.jason.androidappcb.utils.FIleUtils;
 

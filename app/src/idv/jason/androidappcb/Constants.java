@@ -13,7 +13,8 @@ public class Constants {
 	
 	public static final String ACTION_DOWNLOAD_STATUS = "idv.jason.androidcb.action.DOWNLOAD_STATUS	";
 	
-	public static final String DATA_APK_LIST = "idv.jason.androidcb.data.DATA_APK_LIST";
+	public static final String DATA_APP = "idv.jason.androidcb.data.APP";
+	public static final String DATA_APK_LIST = "idv.jason.androidcb.data.APK_LIST";
 	public static final String DATA_FILE_PATH = "idv.jason.androidcb.data.FILE_PATH";
 	public static final String DATA_DOWNLOAD_PROGRESS = "idv.jason.androidcb.data.DOWNLOAD_PROGRESS";
 	public static final String DATA_DOWNLOAD_MAX_PROGRESS = "idv.jason.androidcb.data.DOWNLOAD_MAX_PROGRESS";

@@ -10,7 +10,7 @@ import org.joda.time.format.ISODateTimeFormat;
 import idv.jason.androidappcb.Constants;
 import idv.jason.androidappcb.R;
 import idv.jason.androidappcb.data.AppDataEntity;
-import idv.jason.androidappcb.data.AppDataEntity.AppData;
+import idv.jason.androidappcb.data.AppData;
 import idv.jason.androidappcb.utils.Utils;
 import android.content.Context;
 import android.os.Environment;
@@ -26,14 +26,16 @@ public class AppListAdapter extends BaseAdapter{
 	private AppDataEntity mOldApps = null;
 	private LayoutInflater mInflater;
 	private String mDownloadPath;
+	private View.OnClickListener mListener;
 	
-	public AppListAdapter(Context context, AppDataEntity apps, AppDataEntity oldApps) {
+	public AppListAdapter(Context context, AppDataEntity apps, AppDataEntity oldApps, View.OnClickListener listener) {
 		mApps = apps;
 		mOldApps = oldApps;
 		mInflater = LayoutInflater.from(context);
 		File externalStorage = Environment.getExternalStorageDirectory();
 		mDownloadPath = externalStorage.getAbsolutePath() + "/"
 				+ Constants.APP_SAVE_DIR;
+		mListener = listener;
 	}
 	
 	public AppDataEntity getApps() {
@@ -62,15 +64,11 @@ public class AppListAdapter extends BaseAdapter{
 		}
 		AppData app = mApps.apps.get(position);
 		ImageView image = (ImageView) convertView.findViewById(R.id.app_ic);
-		if(app.name.toLowerCase().contains("debug") || app.name.toLowerCase().contains("dev")) {
-			image.setImageResource(R.drawable.logo_debug);
-		} else if(app.name.toLowerCase().contains("release")) {
-			image.setImageResource(R.drawable.logo_release);
-		} else if(app.name.toLowerCase().contains("rc")) {
-			image.setImageResource(R.drawable.logo_rc);
-		} else if(app.name.toLowerCase().contains("testflight")) {
-			image.setImageResource(R.drawable.test_flight);
-		}
+		int iconId = Utils.getIconFromName(app.name);
+		if(iconId != -1)
+			image.setImageResource(iconId);
+		
+		image.setOnClickListener(mListener);
 		
 		DateTimeFormatter parser = ISODateTimeFormat.dateTimeNoMillis();
 		DateTime date = parser.parseDateTime(app.createdDate);

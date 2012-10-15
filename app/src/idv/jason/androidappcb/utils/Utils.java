@@ -1,6 +1,7 @@
 package idv.jason.androidappcb.utils;
 
-import idv.jason.androidappcb.data.AppDataEntity.AppData;
+import idv.jason.androidappcb.R;
+import idv.jason.androidappcb.data.AppData;
 
 public class Utils {
 	public static String getApkName(AppData app) {
@@ -15,5 +16,19 @@ public class Utils {
 				name == null || name.length() == 0)
 			return null;
 		return name + "_" + app.buildNumber + "." + extension;
+	}
+	
+	public static int getIconFromName(String name) {
+		int resId = -1;
+		if(name.toLowerCase().contains("debug") || name.toLowerCase().contains("dev")) {
+			resId = R.drawable.logo_debug;
+		} else if(name.toLowerCase().contains("release")) {
+			resId = R.drawable.logo_release;
+		} else if(name.toLowerCase().contains("rc")) {
+			resId = R.drawable.logo_rc;
+		} else if(name.toLowerCase().contains("testflight")) {
+			resId = R.drawable.test_flight;
+		}
+		return resId;
 	}
 }
