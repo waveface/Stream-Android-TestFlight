@@ -10,6 +10,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 
 import idv.jason.androidappcb.Constants;
+import idv.jason.androidappcb.RuntimeData;
 import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
@@ -19,7 +20,7 @@ public class DownloadFileTask extends AsyncTask<Void, Integer, Void>{
 	public static String TAG = DownloadFileTask.class.getSimpleName();
 	
 	private String mSavePath;
-	private String mDownloadPath;
+	private String mRemotePath;
 	private Context mContext;
 	private File mDownloadedFile = null;
 	
@@ -28,22 +29,22 @@ public class DownloadFileTask extends AsyncTask<Void, Integer, Void>{
 	
 	private String mFileName;
 	
-	public DownloadFileTask(Context context, String downloadPath, String savepath, String fileName) {
-		Log.d(TAG, "path:" + downloadPath);
+	public DownloadFileTask(Context context, String remotePath, String savepath, String fileName) {
+		Log.d(TAG, "path:" + remotePath);
 		mContext = context;
 		mSavePath = savepath;
-		mDownloadPath = downloadPath;
+		mRemotePath = remotePath;
 		mFileName = fileName;
 	}
 
 	@Override
 	protected Void doInBackground(Void... params) {
 		publishProgress(0);
-		mDownloadedFile = getFileFromUrl(mDownloadPath, mSavePath, mFileName);
+		mDownloadedFile = getFileFromUrl(mRemotePath, mSavePath, mFileName);
 		return null;
 	}
 	
-	public File getFileFromUrl(String url, String saveLocation, String fileName) {
+	public File getFileFromUrl(String remotePath, String saveLocation, String fileName) {
 		File savePath = new File(saveLocation);
 		if(savePath.exists() == false)
 			savePath.mkdir();
@@ -51,10 +52,13 @@ public class DownloadFileTask extends AsyncTask<Void, Integer, Void>{
 		if(file.exists()) {
 			return file;
 		}
+		if(Constants.SERVER_S3.equals(RuntimeData.SERVER_PATH)) {
+			remotePath = RuntimeData.SERVER_PATH + RuntimeData.APK_PATH + fileName;
+		}
 		
 		InputStream is = null;
 		try {
-			URL myURL = new URL(url);
+			URL myURL = new URL(remotePath);
 			HttpURLConnection conn = (HttpURLConnection) myURL.openConnection();   
 	        conn.setReadTimeout(10000 /* milliseconds */);
 			conn.setConnectTimeout(15000 /* milliseconds */);

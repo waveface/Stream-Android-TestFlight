@@ -2,6 +2,7 @@
     <string name="server_status">Server Status:</string>
     <string name="app_name">TestFlight</string>
     <string name="create_date">Created Date:</string>
+    <string name="build_number">Build Number:</string>
     <string name="version_code">Version Code:</string>
     <string name="version_name">Version Name:</string>
     <string name="app_icon">App Icon</string>
@@ -10,4 +11,6 @@
     <string name="downloading_apk">Downloading apk</string>
     <string name="change_log">ChangeLog:</string>
     <string name="refresh">Refresh</string>
+    
+    <string name="server_location">(%s)</string>
 </resources>

@@ -8,6 +8,7 @@ import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
 
 import org.apache.http.HttpResponse;
+import org.apache.http.HttpStatus;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
@@ -55,6 +56,8 @@ public class HttpInvoker {
 				return builder.toString();
 			}			
 		}
+
+		
 		return null;
 	}
 	
@@ -64,6 +67,8 @@ public class HttpInvoker {
 		try {
 			HttpClient httpclient = new DefaultHttpClient();
 			HttpResponse response = httpclient.execute(httpGet);
+			if(response.getStatusLine().getStatusCode() != HttpStatus.SC_OK)
+				return null;
 			content = response.getEntity().getContent();
          } catch (IOException e) {
         	 httpGet.abort();

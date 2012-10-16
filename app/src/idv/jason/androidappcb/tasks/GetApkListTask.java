@@ -24,8 +24,9 @@ public class GetApkListTask extends AsyncTask<String, Void, AppDataEntity>{
 	
 	@Override
 	protected AppDataEntity doInBackground(String... arg0) {
-		String filename = arg0[0];
-		String json = HttpInvoker.getStringFromUrl(Constants.DOWNLOAD_PATH_LIST_PREFIX);
+		String path = arg0[0];
+		String filename = arg0[1];
+		String json = HttpInvoker.getStringFromUrl(path);
 		if(json!=null && !json.equals("ConnectTimeoutException")) {
 			FIleUtils.writeFile(filename, json, false);
 			mSourceList = new Gson().fromJson(json, AppDataEntity.class);

@@ -29,7 +29,9 @@ public class ApkInfoDialog extends DialogFragment{
 		getDialog().requestWindowFeature(Window.FEATURE_LEFT_ICON);
 		getDialog().setCanceledOnTouchOutside(true);
 		
-		TextView tv = (TextView) view.findViewById(R.id.text_version_code_content);
+		TextView tv = (TextView) view.findViewById(R.id.text_build_number_content);
+		tv.setText(mApp.buildNumber);
+		tv = (TextView) view.findViewById(R.id.text_version_code_content);
 		tv.setText(mApp.versionCode);
 		tv = (TextView) view.findViewById(R.id.text_version_name_content);
 		tv.setText(mApp.versionName);

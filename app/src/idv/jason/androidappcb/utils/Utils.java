@@ -15,7 +15,7 @@ public class Utils {
 		if(extension == null || extension.length() == 0 ||
 				name == null || name.length() == 0)
 			return null;
-		return name + "_" + app.buildNumber + "." + extension;
+		return name + "." + extension;
 	}
 	
 	public static int getIconFromName(String name) {

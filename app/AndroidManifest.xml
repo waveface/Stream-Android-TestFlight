@@ -12,6 +12,7 @@
     <application 
         android:label="@string/app_name"
         android:icon="@drawable/test_flight"
+        android:name="idv.jason.androidappcb.TestFlight"
         android:theme="@style/ThemeHolo">
 
         <activity 

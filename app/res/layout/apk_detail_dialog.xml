@@ -5,11 +5,28 @@
     android:padding="10dip">
     
     <TextView
-        android:id="@+id/text_version_code_title"
+        android:id="@+id/text_build_number_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
+        android:textStyle="bold"
+        android:text="@string/build_number" />
+
+    <TextView
+        android:id="@+id/text_build_number_content"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="5dip"
+        android:layout_alignTop="@+id/text_build_number_title"
+        android:layout_toRightOf="@+id/text_build_number_title"/>
+    
+    <TextView
+        android:id="@+id/text_version_code_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/text_build_number_title"
+        android:layout_alignParentLeft="true"
         android:textStyle="bold"
         android:text="@string/version_code" />
 

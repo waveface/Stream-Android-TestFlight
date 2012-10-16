@@ -1,5 +1,6 @@
 package com.waveface.android.testflighter;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Date;
@@ -12,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.google.gson.Gson;
 import com.waveface.android.testflighter.model.Installer;
 import com.waveface.android.testflighter.util.StringUtil;
+import com.waveface.android.testflighter.util.Utils;
 
 /**
  * Servlet implementation class UpdateRelease
@@ -57,11 +59,14 @@ public class UpdateRelease extends HttpServlet {
 			installer.createdDate = StringUtil.formatDate(new Date());
 	    	RuntimeData.handleInstallers(installer);
 			out.print(new Gson().toJson(installer));
+		    Utils.uploadFileToS3(Runtime.getRuntime(), response.getWriter(), RuntimeData.SOTRED_PATH+File.separator+Constant.STORE_JSON_NAME);
+		    Utils.uploadFileToS3(Runtime.getRuntime(), response.getWriter(), RuntimeData.SOTRED_PATH+File.separator+path);
 	    }
 	    else{
-	    	
 	    	out.print("{\"error\":\"wrong parameter!\"}");
 	    }
+	    
+	    
 		//Send Email
 	}
 }
