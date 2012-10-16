@@ -59,8 +59,8 @@ public class UpdateRelease extends HttpServlet {
 			installer.createdDate = StringUtil.formatDate(new Date());
 	    	RuntimeData.handleInstallers(installer);
 			out.print(new Gson().toJson(installer));
-		    Utils.uploadFileToS3(Runtime.getRuntime(), response.getWriter(), RuntimeData.SOTRED_PATH+File.separator+Constant.STORE_JSON_NAME);
 		    Utils.uploadFileToS3(Runtime.getRuntime(), response.getWriter(), RuntimeData.SOTRED_PATH+File.separator+path);
+		    Utils.uploadFileToS3(Runtime.getRuntime(), response.getWriter(), RuntimeData.SOTRED_PATH+File.separator+Constant.STORE_JSON_NAME);
 	    }
 	    else{
 	    	out.print("{\"error\":\"wrong parameter!\"}");
