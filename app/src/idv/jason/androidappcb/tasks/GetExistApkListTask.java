@@ -27,7 +27,6 @@ public class GetExistApkListTask extends AsyncTask<String, Void, AppDataEntity>{
 		String json = FIleUtils.readFile(path);
 		AppDataEntity appDataEntity = new Gson().fromJson(json, AppDataEntity.class);
 		
-
 		if(appDataEntity != null && appDataEntity.apps != null) {
 			for(int i=0; i<appDataEntity.apps.size(); ++i) {
 				AppData app = appDataEntity.apps.get(i);

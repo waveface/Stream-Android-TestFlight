@@ -26,6 +26,7 @@ public class DownloadFileTask extends AsyncTask<Void, Integer, Void>{
 	
 	private int mTotalSize = 0;
 	private int mCurrentSize = 0;
+	private boolean mDownloadResult = false;
 	
 	private String mFileName;
 	
@@ -50,6 +51,7 @@ public class DownloadFileTask extends AsyncTask<Void, Integer, Void>{
 			savePath.mkdir();
 		File file = new File(saveLocation + "/" + fileName);
 		if(file.exists()) {
+			mDownloadResult = true;
 			return file;
 		}
 		if(Constants.SERVER_S3.equals(RuntimeData.SERVER_PATH)) {
@@ -96,6 +98,7 @@ public class DownloadFileTask extends AsyncTask<Void, Integer, Void>{
 					publishProgress(mCurrentSize, mTotalSize);
 				}
 				fos.write(buf, 0, numread);
+				break;
 			} while (true);
 			fos.close();
 		} catch (FileNotFoundException e) {
@@ -104,6 +107,11 @@ public class DownloadFileTask extends AsyncTask<Void, Integer, Void>{
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		}
+		if(mTotalSize == file.length()) {
+			mDownloadResult = true;			
+		} else {
+			file.delete();
 		}
 		return file;
 	}
@@ -122,9 +130,12 @@ public class DownloadFileTask extends AsyncTask<Void, Integer, Void>{
 	@Override
 	protected void onPostExecute(Void result) {
 		super.onPostExecute(result);
-		Intent intent = new Intent(Constants.ACTION_DOWNLOAD_APK_COMPLETE);
-		if(mDownloadedFile != null) {
+		Intent intent;;
+		if(mDownloadedFile != null && mDownloadResult) {
+			intent = new Intent(Constants.ACTION_DOWNLOAD_APK_COMPLETE);
 			intent.putExtra(Constants.DATA_FILE_PATH, mDownloadedFile.getAbsolutePath());
+		} else {
+			intent = new Intent(Constants.ACTION_DOWNLOAD_APK_FAIL);
 		}
 		mContext.sendBroadcast(intent);
 	}

@@ -33,6 +33,7 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class AppListFragment extends ListFragment implements
 		OnItemClickListener {
@@ -80,6 +81,7 @@ public class AppListFragment extends ListFragment implements
 		filter.addAction(Constants.ACTION_DOWNLOAD_LIST_COMPLETE);
 		filter.addAction(Constants.ACTION_DOWNLOAD_LIST_FAIL);
 		filter.addAction(Constants.ACTION_DOWNLOAD_APK_COMPLETE);
+		filter.addAction(Constants.ACTION_DOWNLOAD_APK_FAIL);
 		filter.addAction(Constants.ACTION_DOWNLOAD_STATUS);
 		getActivity().registerReceiver(mReceiver, filter);
 	}
@@ -196,6 +198,9 @@ public class AppListFragment extends ListFragment implements
 					mProgress.setProgress(progress);
 					mProgress.setMax(maxProgress);
 				}
+			} else if(Constants.ACTION_DOWNLOAD_APK_FAIL.equals(action)) {
+				dismissProgressDialog();
+				Toast.makeText(getActivity(), getString(R.string.download_fail), Toast.LENGTH_SHORT).show();
 			}
 		}
 

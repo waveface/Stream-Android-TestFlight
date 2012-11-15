@@ -33,9 +33,9 @@ public class TestFlight extends Application{
 		filter.addAction(Constants.ACTION_READ_LIST_COMPLETE);
 		registerReceiver(mReceiver, filter);
 		
-		RuntimeData.SERVER_PATH = Constants.SERVER_LOCAL;
-		RuntimeData.INSTALLER_PATH = Constants.DOWNLOAD_PATH_LIST_PREFIX;
-		RuntimeData.APK_PATH = Constants.DOWNLOAD_PATH_APK_PREFIX;
+		RuntimeData.SERVER_PATH = Constants.SERVER_S3;
+		RuntimeData.INSTALLER_PATH = "installers.json";
+		RuntimeData.APK_PATH = "";
 		
 		GetExistApkListTask getApk = new GetExistApkListTask(TestFlight.this);
 		getApk.execute(mDownloadPath + "/" + Constants.APP_LIST_SAVE_NAME, null, null);

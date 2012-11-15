@@ -70,6 +70,14 @@ public class AppListAdapter extends BaseAdapter{
 		
 		image.setOnClickListener(mListener);
 		
+		if(app.name.toLowerCase().contains("daily")) {
+			convertView.findViewById(R.id.text_daily).setVisibility(View.VISIBLE);
+			convertView.findViewById(R.id.container_app_info).setVisibility(View.INVISIBLE);
+		} else {
+			convertView.findViewById(R.id.text_daily).setVisibility(View.INVISIBLE);
+			convertView.findViewById(R.id.container_app_info).setVisibility(View.VISIBLE);
+		}
+		
 		DateTimeFormatter parser = ISODateTimeFormat.dateTimeNoMillis();
 		DateTime date = parser.parseDateTime(app.createdDate);
 		StringBuilder builder = new StringBuilder();

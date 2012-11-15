@@ -11,6 +11,9 @@
     <string name="downloading_apk">Downloading apk</string>
     <string name="change_log">ChangeLog:</string>
     <string name="refresh">Refresh</string>
+    <string name="download_fail">Download Fail</string>
+    
+    <string name="daily_build">Daily Build</string>
     
     <string name="server_location">(%s)</string>
 </resources>

@@ -15,6 +15,7 @@ public class Constants {
 	public static final String ACTION_READ_LIST_COMPLETE = "idv.jason.androidcb.action.READ_LIST_COMPLETE";
 	public static final String ACTION_DOWNLOAD_LIST_COMPLETE = "idv.jason.androidcb.action.DOWNLOAD_LIST_COMPLETE";
 	public static final String ACTION_DOWNLOAD_LIST_FAIL = "idv.jason.androidcb.action.DOWNLOAD_LIST_FAIL";
+	public static final String ACTION_DOWNLOAD_APK_FAIL = "idv.jason.androidcb.action.DOWNLOAD_APK_FAIL";
 	
 	public static final String ACTION_DOWNLOAD_STATUS = "idv.jason.androidcb.action.DOWNLOAD_STATUS	";
 	

@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent" 
-    android:layout_gravity="center_vertical">
+    android:layout_height="match_parent" >
 
     <ImageView
         android:id="@+id/app_ic"
@@ -10,8 +9,8 @@
         android:layout_height="50dip"
         android:layout_alignParentLeft="true"
         android:layout_margin="5dip"
-        android:paddingBottom="5dip" 
-        android:contentDescription="@string/app_icon"/>
+        android:contentDescription="@string/app_icon"
+        android:paddingBottom="5dip" />
 
     <ImageView
         android:id="@+id/image_new"
@@ -19,68 +18,83 @@
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
+        android:contentDescription="@string/app_icon"
         android:paddingLeft="2dip"
-        android:visibility="invisible"
         android:src="@drawable/new_logo"
-        android:contentDescription="@string/app_icon"/>
-    
-    
+        android:visibility="invisible" />
+
     <TextView
         android:id="@+id/appName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
-        android:textStyle="bold"
         android:layout_toRightOf="@+id/app_ic"
-	/>
+        android:textStyle="bold" />
 
-    <TextView
-        android:id="@+id/versionText"
+    <RelativeLayout
+        android:id="@+id/container_app_info"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_toRightOf="@+id/app_ic"
         android:layout_below="@+id/appName"
-        android:text="@string/version_code" />
+        android:layout_toRightOf="@+id/app_ic" >
+
+        <TextView
+            android:id="@+id/versionText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/version_code" />
+
+        <TextView
+            android:id="@+id/version"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/versionText"
+            android:layout_marginLeft="5dip"
+            android:layout_toRightOf="@+id/versionText" />
+
+        <TextView
+            android:id="@+id/createDateText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/versionText"
+            android:layout_marginBottom="5dip"
+            android:layout_toRightOf="@+id/app_ic"
+            android:text="@string/create_date" />
+
+        <TextView
+            android:id="@+id/createDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/createDateText"
+            android:layout_marginLeft="5dip"
+            android:layout_toLeftOf="@+id/image_exist"
+            android:layout_toRightOf="@+id/createDateText" />
+    </RelativeLayout>
 
     <TextView
-        android:id="@+id/version"
+        android:id="@+id/text_daily"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="5dip"
-        android:layout_alignTop="@+id/versionText"
-        android:layout_toRightOf="@+id/versionText"/>
-    
-    
-    <TextView
-        android:id="@+id/createDateText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/versionText"
-        android:layout_marginBottom="5dip"
-        android:layout_toRightOf="@+id/app_ic"
-        android:text="@string/create_date" />
-    
-    <TextView
-        android:id="@+id/createDate"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="5dip"
-        android:layout_toLeftOf="@+id/image_exist"
-        android:layout_alignTop="@+id/createDateText"
-        android:layout_toRightOf="@+id/createDateText"/>
-    
-    <ImageView 
-        android:id="@+id/image_exist"
-        android:src="@drawable/save"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerVertical="true"
-        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:textSize="24sp"
+        android:paddingBottom="8dip"
+        android:gravity="bottom"
+        android:textColor="#88000000"
+        android:textStyle="italic"
+        android:typeface="normal"
         android:visibility="invisible"
-        android:layout_marginRight="5dip"
-        android:layout_marginLeft="5dip"
-        />
+        android:layout_toRightOf="@+id/app_ic"
+        android:text="@string/daily_build" />
 
-    
+    <ImageView
+        android:id="@+id/image_exist"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="5dip"
+        android:layout_marginRight="5dip"
+        android:src="@drawable/save"
+        android:visibility="invisible" />
 
 </RelativeLayout>
