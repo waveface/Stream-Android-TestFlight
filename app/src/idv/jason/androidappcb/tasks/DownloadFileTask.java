@@ -98,7 +98,6 @@ public class DownloadFileTask extends AsyncTask<Void, Integer, Void>{
 					publishProgress(mCurrentSize, mTotalSize);
 				}
 				fos.write(buf, 0, numread);
-				break;
 			} while (true);
 			fos.close();
 		} catch (FileNotFoundException e) {
