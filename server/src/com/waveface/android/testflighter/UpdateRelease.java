@@ -56,7 +56,7 @@ public class UpdateRelease extends HttpServlet {
 			installer.buildNumber = buildNumber ;
 			installer.path = mHttpHeader+path;
 			installer.features = features ;
-			installer.createdDate = StringUtil.formatDate(new Date());
+			installer.createdDate = StringUtil.getLocalDate();
 	    	RuntimeData.handleInstallers(installer);
 			out.print(new Gson().toJson(installer));
 		    Utils.uploadFileToS3(Runtime.getRuntime(), response.getWriter(), RuntimeData.SOTRED_PATH+File.separator+path);
