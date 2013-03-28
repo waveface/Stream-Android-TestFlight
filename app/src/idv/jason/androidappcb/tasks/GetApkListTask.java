@@ -27,16 +27,20 @@ public class GetApkListTask extends AsyncTask<String, Void, AppDataEntity>{
 		String path = arg0[0];
 		String filename = arg0[1];
 		String json = HttpInvoker.getStringFromUrl(path);
-		if(json!=null && !json.equals("ConnectTimeoutException")) {
-			FIleUtils.writeFile(filename, json, false);
-			mSourceList = new Gson().fromJson(json, AppDataEntity.class);
-			if(mSourceList != null && mSourceList.apps != null) {
-				for(int i=0; i<mSourceList.apps.size(); ++i) {
-					AppData app = mSourceList.apps.get(i);
-					app.apkName = app.path.substring(app.path.lastIndexOf("=") +1); 
+		try {
+			if(json!=null && !json.equals("ConnectTimeoutException")) {
+				FIleUtils.writeFile(filename, json, false);
+				mSourceList = new Gson().fromJson(json, AppDataEntity.class);
+				if(mSourceList != null && mSourceList.apps != null) {
+					for(int i=0; i<mSourceList.apps.size(); ++i) {
+						AppData app = mSourceList.apps.get(i);
+						app.apkName = app.path.substring(app.path.lastIndexOf("=") +1); 
+					}
+					return mSourceList;
 				}
-				return mSourceList;
 			}
+		} catch (Exception e) {
+			return null;
 		}
 		return null;
 	}
